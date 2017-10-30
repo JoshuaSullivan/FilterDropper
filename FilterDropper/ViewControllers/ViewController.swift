@@ -13,10 +13,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultCollectionView: UICollectionView!
     @IBOutlet weak var filterCollectionView: UICollectionView!
     @IBOutlet weak var interactionPrompt: UILabel!
+    
+    var filterNames: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let decoder = JSONDecoder()
+        guard
+            let filtersURL = Bundle.main.url(forResource: "filters", withExtension: "json"),
+            let filtersData = try? Data(contentsOf: filtersURL),
+            let filters = try? decoder.decode([String].self, from: filtersData)
+        else {
+            fatalError("Couldn't load the filters.")
+        }
+        self.filterNames = filters
     }
 
     override func didReceiveMemoryWarning() {
