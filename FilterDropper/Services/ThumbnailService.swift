@@ -31,7 +31,6 @@ final class ThumbnailService {
         queue.qualityOfService = .default
         let keyPath = \OperationQueue.operationCount
         queueObservationToken = queue.observe(keyPath, changeHandler: { (queue, change) in
-            debugPrint("Queue operation count: \(queue.operationCount)")
             if queue.operationCount == 0 {
                 debugPrint("Thumbnail generation complete.")
             }
