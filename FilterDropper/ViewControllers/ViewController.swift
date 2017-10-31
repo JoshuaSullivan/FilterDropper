@@ -28,6 +28,7 @@ class ViewController: UIViewController {
             fatalError("Couldn't load the filters.")
         }
         self.filterNames = filters
+        ThumbnailService.shared.generateThumbnailsIfNeeded(for: filters)
     }
 
     override func didReceiveMemoryWarning() {

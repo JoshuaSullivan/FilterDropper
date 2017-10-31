@@ -36,14 +36,13 @@ final class RenderService {
         }
     }
     
-    func renderFilterThumbnail(baseImage: UIImage, filterName: String, completion: Completion) {
+    func renderFilterThumbnail(baseImage: UIImage, filterName: String) -> UIImage? {
         guard
             let filter = CIFilter(name: filterName),
             let ci = CIImage(image: baseImage)
             else {
                 print("ERROR: Could not set up filter.")
-                completion(nil)
-                return
+                return nil
         }
         let imageSize = baseImage.size
         filter.setValue(ci, forKey: kCIInputImageKey)
@@ -52,17 +51,15 @@ final class RenderService {
         }
         guard let output = filter.outputImage else {
             print("ERROR: Unable to read filter output.")
-            completion(nil)
-            return
+            return nil
         }
         let imageBounds = CGRect(x: 0.0, y: 0.0, width: imageSize.width, height: imageSize.height)
         guard let renderedImage = context.createCGImage(output, from: imageBounds) else {
             print("ERROR: Unable to render image.")
-            completion(nil)
-            return
+            return nil
         }
         let finalImage = UIImage(cgImage: renderedImage, scale: baseImage.scale, orientation: baseImage.imageOrientation)
-        completion(finalImage)
+        return finalImage
     }
     
     func render(image: CIImage, bounds: CGRect? = nil, completion: @escaping Completion) {

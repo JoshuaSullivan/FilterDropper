@@ -32,8 +32,6 @@
  "CIHoleDistortion",
  "CIKaleidoscope",
  "CILightTunnel",
- "CILinearGradient",
- "CILinearToSRGBToneCurve",
  "CILineOverlay",
  "CILineScreen",
  "CIMedianFilter",

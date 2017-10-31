@@ -16,6 +16,20 @@ class FilterCollectionViewCell: UICollectionViewCell {
             titleContainer.layer.cornerRadius = 8.0
         }
     }
+    private var currentFilter: String = ""
     
+    func configure(with filterName: String) {
+        ThumbnailService.shared.thumbnail(for: filterName) {
+            [weak self] image in
+            guard let image = image else {
+                // Got no image back.
+                
+            }
+            if filterName == self?.currentFilter {
+                self?.imageView.image =
+            }
+        }
+        currentFilter = filterName
+    }
     
 }
