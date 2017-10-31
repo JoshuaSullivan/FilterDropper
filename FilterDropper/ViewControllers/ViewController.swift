@@ -11,10 +11,18 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var resultCollectionView: UICollectionView!
-    @IBOutlet weak var filterCollectionView: UICollectionView!
+    @IBOutlet weak var filterCollectionView: UICollectionView! {
+        didSet {
+            filterCollectionView.delegate = self
+        }
+    }
     @IBOutlet weak var interactionPrompt: UILabel!
     
     var filterNames: [String] = []
+    
+    var filterDataSource: CollectionViewDataSource<String>!
+    
+    var cellSize: CGSize = CGSize(width: 300.0, height: 300.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,12 @@ class ViewController: UIViewController {
         }
         self.filterNames = filters
         ThumbnailService.shared.generateThumbnailsIfNeeded(for: filters)
+        filterDataSource = CollectionViewDataSource<String>(data: filters, cellIdentifier: "FilterCell", config: {
+            (cell, filterName) in
+            guard let filterCell = cell as? FilterCollectionViewCell else { return }
+            filterCell.configure(with: filterName)
+        })
+        filterCollectionView.dataSource = filterDataSource
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +53,15 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print("Transitioning to size: \(size)")
+        super.viewWillTransition(to: size, with: coordinator)
+    }
 }
 
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 300.0, height: 300.0)
+    }
+}

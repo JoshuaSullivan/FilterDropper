@@ -21,21 +21,21 @@ class GeneratePreviewOperation: Operation {
     }
     
     override func main() {
-        debugPrint("Starting generate thumbnail operation for '\(filterName)'.")
+//        debugPrint("Starting generate thumbnail operation for '\(filterName)'.")
         guard !cache.contains(key: filterName) else {
             // We don't need to do anything.
-            debugPrint("The cache already contained an image for this key. Skipping...")
+//            debugPrint("The cache already contained an image for this key. Skipping...")
             return
         }
         if let image = RenderService.shared.renderFilterThumbnail(baseImage: baseImage, filterName: filterName) {
-            debugPrint("Successfully created thumbnail.")
+//            debugPrint("Successfully created thumbnail.")
             do {
                 try cache.store(thumbnail: image, withKey: filterName)
-                debugPrint("Successfully cached thumbnail.")
+//                debugPrint("Successfully cached thumbnail.")
             } catch {
                 print("ERROR: Unable to save thumbnail to cache: \(error.localizedDescription)")
             }
         }
-        debugPrint("Generate thumbnail operation complete.")
+//        debugPrint("Generate thumbnail operation complete.")
     }
 }

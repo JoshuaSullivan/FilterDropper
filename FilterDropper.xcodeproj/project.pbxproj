@@ -20,6 +20,7 @@
 		BCC876331FA779DA00498755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876311FA779DA00498755 /* Main.storyboard */; };
 		BCC876351FA779DA00498755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCC876341FA779DA00498755 /* Assets.xcassets */; };
 		BCC876381FA779DA00498755 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876361FA779DA00498755 /* LaunchScreen.storyboard */; };
+		BCF56F551FA8DE36002F9E63 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF56F541FA8DE36002F9E63 /* CollectionViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		BCC876341FA779DA00498755 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCC876371FA779DA00498755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCC876391FA779DA00498755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCF56F541FA8DE36002F9E63 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				BC89A0E11FA79C9000C5E3EC /* ThumbnailService.swift */,
-				BC170A2D1FA80D8B001EE32F /* ThumbnailCache.swift */,
 				BC170A251FA7ADF5001EE32F /* RenderService.swift */,
 			);
 			path = Services;
@@ -156,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				BC170A271FA7AEC2001EE32F /* Extensions */,
+				BCF56F531FA8DE02002F9E63 /* ModelControllers */,
 				BC89A0E51FA79D2200C5E3EC /* Models */,
 				BC89A0E01FA79C6400C5E3EC /* Services */,
 				BC89A0D01FA77DE400C5E3EC /* ViewControllers */,
@@ -168,6 +170,15 @@
 				BCC876341FA779DA00498755 /* Assets.xcassets */,
 			);
 			path = FilterDropper;
+			sourceTree = "<group>";
+		};
+		BCF56F531FA8DE02002F9E63 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BC170A2D1FA80D8B001EE32F /* ThumbnailCache.swift */,
+				BCF56F541FA8DE36002F9E63 /* CollectionViewDataSource.swift */,
+			);
+			path = ModelControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 				BC89A0D61FA77F3D00C5E3EC /* FilterCollectionViewCell.swift in Sources */,
 				BC89A0E21FA79C9000C5E3EC /* ThumbnailService.swift in Sources */,
 				BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */,
+				BCF56F551FA8DE36002F9E63 /* CollectionViewDataSource.swift in Sources */,
 				BC170A261FA7ADF5001EE32F /* RenderService.swift in Sources */,
 				BC170A291FA7AECF001EE32F /* UIDevice+Model.swift in Sources */,
 				BC170A2C1FA80C24001EE32F /* GeneratePreviewOperation.swift in Sources */,
