@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class ViewController: UIViewController {
     
@@ -44,6 +45,9 @@ class ViewController: UIViewController {
         })
         filterCollectionView.dataSource = filterDataSource
         cellSize = size(for: view.bounds.width)
+        
+        filterCollectionView.dropDelegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,5 +87,17 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize
+    }
+}
+
+extension ViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        print("Drop it like it's hot!")
+        print("Index path: \(coordinator.destinationIndexPath!)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        let allowedTypes = [kUTTypeJPEG, kUTTypePNG].map({ $0 as String })
+        return session.hasItemsConforming(toTypeIdentifiers: allowedTypes)
     }
 }
