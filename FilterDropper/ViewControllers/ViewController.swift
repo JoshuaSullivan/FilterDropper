@@ -11,7 +11,12 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var resultCollectionView: UICollectionView!
+    @IBOutlet weak var resultCollectionView: UICollectionView! {
+        didSet {
+            resultCollectionView.allowsSelection = false
+            resultCollectionView.delegate = self
+        }
+    }
     @IBOutlet weak var filterCollectionView: UICollectionView! {
         didSet {
             filterCollectionView.allowsSelection = false
@@ -144,7 +149,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
             return filterCellSize
         } else if collectionView == resultCollectionView {
             let image = renderedImages[indexPath.item]
-            return image.size
+            return image.size / UIScreen.main.scale
         } else {
             fatalError("Where did this collection view come from?")
         }
