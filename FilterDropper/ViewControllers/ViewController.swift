@@ -14,16 +14,37 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultCollectionView: UICollectionView!
     @IBOutlet weak var filterCollectionView: UICollectionView! {
         didSet {
+            filterCollectionView.allowsSelection = false
             filterCollectionView.delegate = self
         }
     }
     @IBOutlet weak var interactionPrompt: UILabel!
     
     var filterNames: [String] = []
+    var renderResults: [RenderResult] = []
+    var renderedImages: [UIImage] = [] {
+        didSet {
+            interactionPrompt.isHidden = !renderedImages.isEmpty
+            resultDataSource.data = renderedImages
+            resultCollectionView.reloadData()
+        }
+    }
     
     var filterDataSource: CollectionViewDataSource<String>!
+    var resultDataSource: CollectionViewDataSource<UIImage>!
     
-    var cellSize: CGSize = CGSize(width: 300.0, height: 300.0)
+    var filterDropDelegate: FilterCollectionDropManager!
+    
+    var filterCellSize: CGSize = CGSize(width: 300.0, height: 300.0)
+    
+    var queueObserver: NSKeyValueObservation!
+    
+    let renderQueue: OperationQueue = {
+        let oq = OperationQueue()
+        oq.maxConcurrentOperationCount = 1
+        oq.qualityOfService = .default
+        return oq
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +65,29 @@ class ViewController: UIViewController {
             filterCell.configure(with: filterName)
         })
         filterCollectionView.dataSource = filterDataSource
-        cellSize = size(for: view.bounds.width)
+        filterDropDelegate = FilterCollectionDropManager()
+        filterDropDelegate.delegate = self
+        filterCollectionView.dropDelegate = filterDropDelegate
+        filterCellSize = size(for: view.bounds.width)
         
-        filterCollectionView.dropDelegate = self
+        resultDataSource = CollectionViewDataSource<UIImage>(data: [], cellIdentifier: "ResultCell", config: {
+            (cell, image) in
+            guard let resultCell = cell as? ResultImageCollectionViewCell else { return }
+            resultCell.imageView.image = image
+        })
+        resultCollectionView.dataSource = resultDataSource
         
+        let keyPath = \OperationQueue.operationCount
+        queueObserver = renderQueue.observe(keyPath, changeHandler: self.queueCountDidChange)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        queueObserver.invalidate()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -61,7 +96,7 @@ class ViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.cellSize = self.size(for: size.width)
+        self.filterCellSize = self.size(for: size.width)
         filterCollectionView.reloadData()
     }
     
@@ -82,22 +117,45 @@ class ViewController: UIViewController {
         dim = floor(dim)
         return CGSize(width: dim, height: dim)
     }
+    
+    func apply(filterName: String, to images: [UIImage]) {
+        let ops = images.map({ ApplyFilterOperation(image: $0, filterName: filterName, completion: self.renderComplete) })
+        renderQueue.addOperations(ops, waitUntilFinished: false)
+    }
+    
+    func renderComplete(result: RenderResult?) {
+        guard let result = result else { return }
+        renderResults.append(result)
+        if let image = UIImage(contentsOfFile: result.previewURL.path) {
+            renderedImages.append(image)
+        }
+    }
+    
+    func queueCountDidChange(_ queue: OperationQueue, _ value: NSKeyValueObservedChange<Int>) {
+        if queue.operationCount == 0 {
+            print("Queue complete!")
+        }
+    }
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
+        if collectionView == filterCollectionView {
+            return filterCellSize
+        } else if collectionView == resultCollectionView {
+            let image = renderedImages[indexPath.item]
+            return image.size
+        } else {
+            fatalError("Where did this collection view come from?")
+        }
     }
 }
 
-extension ViewController: UICollectionViewDropDelegate {
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        print("Drop it like it's hot!")
-        print("Index path: \(coordinator.destinationIndexPath!)")
+extension ViewController: FilterCollectionDropManagerDelegate {
+    func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath) {
+        let filterName = self.filterNames[indexPath.item]
+        self.apply(filterName: filterName, to: images)
     }
     
-    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        let allowedTypes = [kUTTypeJPEG, kUTTypePNG].map({ $0 as String })
-        return session.hasItemsConforming(toTypeIdentifiers: allowedTypes)
-    }
+    
 }

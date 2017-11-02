@@ -11,6 +11,9 @@ import UIKit
 extension UIDevice {
     
     var isMetalCapable: Bool {
+        if TARGET_IPHONE_SIMULATOR != 0 || TARGET_OS_SIMULATOR != 0 {
+            return false
+        }
         let model = hardwareModel
         switch model.idiom {
         case .phone: return model.generation >= 8

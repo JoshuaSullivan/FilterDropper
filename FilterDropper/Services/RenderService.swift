@@ -62,18 +62,15 @@ final class RenderService {
         return finalImage
     }
     
-    func render(image: CIImage, bounds: CGRect? = nil, completion: @escaping Completion) {
+    func render(image: CIImage, bounds: CGRect? = nil) -> UIImage? {
         let imageBounds = bounds ?? image.extent
-        DispatchQueue.global(qos: .default).async {
-            var finalImage: UIImage? = nil
-            if let cg = self.context.createCGImage(image, from: imageBounds) {
-                finalImage = UIImage(cgImage: cg)
-            } else {
-                print("ERROR: Unable to render image.")
-            }
-            DispatchQueue.main.async {
-                completion(finalImage)
-            }
+        var finalImage: UIImage? = nil
+        if let cg = self.context.createCGImage(image, from: imageBounds) {
+            finalImage = UIImage(cgImage: cg)
+        } else {
+            print("ERROR: Unable to render image.")
         }
+        return finalImage
     }
 }
+

@@ -15,7 +15,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Clear out old images.
+        print("Beginning purge of old images.")
+        let fm = FileManager.default
+        if let docs = try? fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            let imageDir = docs.appendingPathComponent(savedImageDirectory)
+            do {
+                // This will fail if the directory already exists, but that's okay.
+                try fm.createDirectory(at: imageDir, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                debugPrint("ERROR: Unable to create saved image directory: \(error.localizedDescription)")
+            }
+            if let fileURLs = try? fm.contentsOfDirectory(at: imageDir, includingPropertiesForKeys: nil, options: []) {
+                for url in fileURLs {
+                    do {
+                        try fm.removeItem(at: url)
+                    } catch {
+                        print("Failed to remove item at '\(url)': \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+        print("Purge complete.")
+        
         return true
     }
 
