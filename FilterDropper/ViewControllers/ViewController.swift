@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     var resultDataSource: CollectionViewDataSource<UIImage>!
     
     var filterDropDelegate: FilterCollectionDropManager!
+    var resultDragDelegate: ResultCollectionDragManager!
     
     var filterCellSize: CGSize = CGSize(width: 300.0, height: 300.0)
     
@@ -81,6 +82,10 @@ class ViewController: UIViewController {
             resultCell.imageView.image = image
         })
         resultCollectionView.dataSource = resultDataSource
+        
+        resultDragDelegate = ResultCollectionDragManager()
+        resultCollectionView.dragDelegate = resultDragDelegate
+        resultDragDelegate.dataSource = self
         
         let keyPath = \OperationQueue.operationCount
         queueObserver = renderQueue.observe(keyPath, changeHandler: self.queueCountDidChange)
@@ -160,6 +165,19 @@ extension ViewController: FilterCollectionDropManagerDelegate {
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath) {
         let filterName = self.filterNames[indexPath.item]
         self.apply(filterName: filterName, to: images)
+    }
+}
+
+extension ViewController: ResultCollectionDragManagerDataSource {
+    func image(for indexPath: IndexPath) -> UIImage? {
+        let result = self.renderResults[indexPath.item]
+        guard
+            let data = try? Data(contentsOf: result.fullResolutionURL),
+            let image = UIImage(data: data)
+        else {
+            return nil
+        }
+        return image
     }
     
     

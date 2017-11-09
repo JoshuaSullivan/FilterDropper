@@ -46,9 +46,7 @@ final class RenderService {
         }
         let imageSize = baseImage.size
         filter.setValue(ci, forKey: kCIInputImageKey)
-        if filter.inputKeys.contains(kCIInputCenterKey) {
-            filter.setValue(CIVector(x: imageSize.width / 2.0, y: imageSize.height / 2.0), forKey: kCIInputCenterKey)
-        }
+        AestheticsManager.applyAesthetics(to: filter, withImageSize: imageSize)
         guard let output = filter.outputImage else {
             print("ERROR: Unable to read filter output.")
             return nil

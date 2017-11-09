@@ -34,10 +34,7 @@ class ApplyFilterOperation: Operation {
             complete(nil)
             return
         }
-        if filter.inputKeys.contains(kCIInputCenterKey) {
-            let center = CIVector(x: image.size.width / 2.0, y: image.size.height / 2.0)
-            filter.setValue(center, forKey: kCIInputCenterKey)
-        }
+        AestheticsManager.applyAesthetics(to: filter, withImageSize: image.size)
         filter.setValue(ci, forKey: kCIInputImageKey)
         
         // Render the full-res image.
