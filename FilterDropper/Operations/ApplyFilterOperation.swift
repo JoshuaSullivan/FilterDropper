@@ -34,8 +34,8 @@ class ApplyFilterOperation: Operation {
             complete(nil)
             return
         }
-        AestheticsManager.applyAesthetics(to: filter, withImageSize: image.size)
         filter.setValue(ci, forKey: kCIInputImageKey)
+        AestheticsManager.applyAesthetics(to: filter, withImageSize: ci.extent.size)
         
         // Render the full-res image.
         guard let output = filter.outputImage else {
@@ -43,6 +43,7 @@ class ApplyFilterOperation: Operation {
             complete(nil)
             return
         }
+        
         guard let rendered = RenderService.shared.render(image: output, bounds: ci.extent) else {
             print("ERROR: Failed to render full-sized image.")
             complete(nil)
