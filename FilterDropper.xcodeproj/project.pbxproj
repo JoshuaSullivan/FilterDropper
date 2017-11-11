@@ -21,6 +21,7 @@
 		BCC876331FA779DA00498755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876311FA779DA00498755 /* Main.storyboard */; };
 		BCC876351FA779DA00498755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCC876341FA779DA00498755 /* Assets.xcassets */; };
 		BCC876381FA779DA00498755 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876361FA779DA00498755 /* LaunchScreen.storyboard */; };
+		BCE158D01FB74D270084CB8D /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE158CF1FB74D270084CB8D /* UIImage+Orientation.swift */; };
 		BCED3F3D1FAA443E00AFA292 /* ApplyFilterOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED3F3C1FAA443E00AFA292 /* ApplyFilterOperation.swift */; };
 		BCED3F3F1FAA466100AFA292 /* RenderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED3F3E1FAA466100AFA292 /* RenderResult.swift */; };
 		BCED3F411FAB524600AFA292 /* Geometry+Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED3F401FAB524600AFA292 /* Geometry+Math.swift */; };
@@ -48,6 +49,7 @@
 		BCC876341FA779DA00498755 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCC876371FA779DA00498755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCC876391FA779DA00498755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCE158CF1FB74D270084CB8D /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		BCED3F3C1FAA443E00AFA292 /* ApplyFilterOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFilterOperation.swift; sourceTree = "<group>"; };
 		BCED3F3E1FAA466100AFA292 /* RenderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderResult.swift; sourceTree = "<group>"; };
 		BCED3F401FAB524600AFA292 /* Geometry+Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+Math.swift"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				BC170A281FA7AECF001EE32F /* UIDevice+Model.swift */,
 				BCED3F401FAB524600AFA292 /* Geometry+Math.swift */,
+				BCE158CF1FB74D270084CB8D /* UIImage+Orientation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				BCF1C1C31FB3F82100D85D8D /* AestheticsManager.swift in Sources */,
 				BC6BA1351FAA11A900F3122F /* FilterCollectionDropManager.swift in Sources */,
 				BC89A0E21FA79C9000C5E3EC /* ThumbnailService.swift in Sources */,
+				BCE158D01FB74D270084CB8D /* UIImage+Orientation.swift in Sources */,
 				BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */,
 				BCED3F411FAB524600AFA292 /* Geometry+Math.swift in Sources */,
 				BCF56F551FA8DE36002F9E63 /* CollectionViewDataSource.swift in Sources */,

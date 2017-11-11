@@ -46,8 +46,7 @@ final class RenderService {
         }
         let imageSize = baseImage.size
         filter.setValue(ci, forKey: kCIInputImageKey)
-        AestheticsManager.applyAesthetics(to: filter, withImageSize: imageSize)
-        guard let output = filter.outputImage else {
+        guard let output = AestheticsManager.applyAesthetics(to: filter, withImageSize: imageSize) else {
             print("ERROR: Unable to read filter output.")
             return nil
         }

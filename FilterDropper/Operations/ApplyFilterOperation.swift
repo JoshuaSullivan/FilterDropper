@@ -28,22 +28,26 @@ class ApplyFilterOperation: Operation {
     override func main() {
         guard
             let filter = CIFilter(name: filterName),
-            let ci = CIImage(image: image)
+            var ci = CIImage(image: image)
         else {
             print("ERROR: Could not create filter.")
             complete(nil)
             return
         }
-        filter.setValue(ci, forKey: kCIInputImageKey)
-        AestheticsManager.applyAesthetics(to: filter, withImageSize: ci.extent.size)
         
-        // Render the full-res image.
-        guard let output = filter.outputImage else {
+        if image.imageOrientation != .up {
+            ci = correctOrientation(of: ci, for: image.imageOrientation)
+        }
+        
+        filter.setValue(ci, forKey: kCIInputImageKey)
+        
+        guard let output = AestheticsManager.applyAesthetics(to: filter, withImageSize: ci.extent.size) else {
             print("ERROR: Couldn't get output image from filter.")
             complete(nil)
             return
         }
-        
+    
+        // Render the full-res image.
         guard let rendered = RenderService.shared.render(image: output, bounds: ci.extent) else {
             print("ERROR: Failed to render full-sized image.")
             complete(nil)
@@ -97,5 +101,10 @@ class ApplyFilterOperation: Operation {
             print("ERROR: Unable to save image: \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    private func correctOrientation(of image: CIImage, for orientation: UIImageOrientation) -> CIImage {
+        let cgOrientation = orientation.cgImageOrientation
+        return image.oriented(cgOrientation)
     }
 }
