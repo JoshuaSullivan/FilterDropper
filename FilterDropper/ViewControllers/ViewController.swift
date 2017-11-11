@@ -51,6 +51,8 @@ class ViewController: UIViewController {
         oq.qualityOfService = .default
         return oq
     }()
+    
+    var isBlocked: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,12 +130,12 @@ class ViewController: UIViewController {
         return CGSize(width: dim, height: dim)
     }
     
-    func apply(filterName: String, to images: [UIImage]) {
+    private func apply(filterName: String, to images: [UIImage]) {
         let ops = images.map({ ApplyFilterOperation(image: $0, filterName: filterName, completion: self.renderComplete) })
         renderQueue.addOperations(ops, waitUntilFinished: false)
     }
     
-    func renderComplete(result: RenderResult?) {
+    private func renderComplete(result: RenderResult?) {
         guard let result = result else { return }
         renderResults.append(result)
         if let image = UIImage(contentsOfFile: result.previewURL.path) {
@@ -141,11 +143,25 @@ class ViewController: UIViewController {
         }
     }
     
-    func queueCountDidChange(_ queue: OperationQueue, _ value: NSKeyValueObservedChange<Int>) {
+    private func queueCountDidChange(_ queue: OperationQueue, _ value: NSKeyValueObservedChange<Int>) {
         if queue.operationCount == 0 {
-            print("Queue complete!")
+            unblockUI()
         }
     }
+    
+    private func blockUI() {
+        guard !isBlocked else { return }
+        self.isBlocked = true
+        self.performSegue(withIdentifier: "showOverlay", sender: nil)
+    }
+    
+    private func unblockUI() {
+        guard isBlocked else { return }
+        self.dismiss(animated: true) {
+            self.isBlocked = false
+        }
+    }
+    
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
@@ -162,7 +178,14 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: FilterCollectionDropManagerDelegate {
+    func filterDropManager(willReceiveImages filterDropManager: FilterCollectionDropManager) {
+        blockUI()
+    }
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath) {
+        guard !images.isEmpty else {
+            unblockUI()
+            return
+        }
         let filterName = self.filterNames[indexPath.item]
         self.apply(filterName: filterName, to: images)
     }

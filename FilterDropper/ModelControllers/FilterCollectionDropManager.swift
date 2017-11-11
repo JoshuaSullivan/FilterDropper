@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 
 protocol FilterCollectionDropManagerDelegate: class {
+    func filterDropManager(willReceiveImages filterDropManager: FilterCollectionDropManager)
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath)
 }
 
@@ -20,7 +21,9 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         // THIS IS WHERE THE RUBBER HITS THE ROAD, BAY-BEE!!!
         guard let indexPath = coordinator.destinationIndexPath else { return }
+        delegate?.filterDropManager(willReceiveImages: self)
         coordinator.session.loadObjects(ofClass: UIImage.self) { (items) in
+            guard !items.isEmpty else { return }
             let images = items.flatMap({ $0 as? UIImage })
             debugPrint("Able to convert \(images.count)/\(items.count) to images.")
             self.delegate?.filterDropManager(self, didReceive: images, at: indexPath)
