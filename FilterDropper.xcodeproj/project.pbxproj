@@ -197,10 +197,10 @@
 			isa = PBXGroup;
 			children = (
 				BC170A2D1FA80D8B001EE32F /* ThumbnailCache.swift */,
+				BCF1C1C21FB3F82100D85D8D /* AestheticsManager.swift */,
 				BCF56F541FA8DE36002F9E63 /* CollectionViewDataSource.swift */,
 				BC6BA1341FAA11A900F3122F /* FilterCollectionDropManager.swift */,
 				BCF1C1C01FB3EF5C00D85D8D /* ResultCollectionDragManager.swift */,
-				BCF1C1C21FB3F82100D85D8D /* AestheticsManager.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";

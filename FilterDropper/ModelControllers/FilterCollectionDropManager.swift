@@ -24,8 +24,14 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
         // THIS IS WHERE THE RUBBER HITS THE ROAD, BAY-BEE!!!
         guard let indexPath = coordinator.destinationIndexPath else { return }
         delegate?.filterDropManager(willReceiveImages: self)
-        coordinator.session.loadObjects(ofClass: UIImage.self) { (items) in
-            guard !items.isEmpty else { return }
+        coordinator.session.loadObjects(ofClass: UIImage.self) {
+            [weak self]
+            (items) in
+            guard let `self` = self else { return }
+            guard !items.isEmpty else {
+                self.delegate?.filterDropManager(self, didReceive: [], at: indexPath)
+                return
+            }
             let images = items.flatMap({ $0 as? UIImage })
             debugPrint("Able to convert \(images.count)/\(items.count) to images.")
             self.delegate?.filterDropManager(self, didReceive: images, at: indexPath)
@@ -35,10 +41,6 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         let result = session.hasItemsConforming(toTypeIdentifiers: UIImage.readableTypeIdentifiersForItemProvider)
         return result
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnter session: UIDropSession) {
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {

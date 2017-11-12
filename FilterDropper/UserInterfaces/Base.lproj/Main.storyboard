@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad9_7" orientation="landscape">
+    <device id="ipad10_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FilterDropper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HPE-zQ-mfu" userLabel="Output Collection">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="320"/>
+                                <rect key="frame" x="0.0" y="20" width="1112" height="320"/>
                                 <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="jWI-wc-hhA"/>
@@ -56,7 +56,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6TU-nY-id5" userLabel="Filter Collection View">
-                                <rect key="frame" x="0.0" y="341" width="1024" height="427"/>
+                                <rect key="frame" x="0.0" y="341" width="1112" height="493"/>
                                 <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="czB-fz-Bqp">
                                     <size key="itemSize" width="240" height="240"/>
@@ -122,13 +122,13 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag and drop images onto the filters below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOl-5y-GfL">
-                                <rect key="frame" x="20" y="150" width="984" height="24"/>
+                                <rect key="frame" x="20" y="150" width="1072" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krH-19-2sr" userLabel="Divider">
-                                <rect key="frame" x="0.0" y="340" width="1024" height="1"/>
+                                <rect key="frame" x="0.0" y="340" width="1112" height="1"/>
                                 <color key="backgroundColor" white="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="hxC-b7-qDm"/>
@@ -169,19 +169,19 @@
             <objects>
                 <viewController id="TD3-z1-f1A" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="daD-JL-NbQ">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvY-df-oZX">
-                                <rect key="frame" x="398" y="341" width="288" height="86"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="72"/>
+                                <rect key="frame" x="450.5" y="381" width="241" height="72"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WvY-df-oZX" firstAttribute="centerX" secondItem="daD-JL-NbQ" secondAttribute="centerX" constant="30" id="3aU-yr-0XC"/>
+                            <constraint firstItem="WvY-df-oZX" firstAttribute="centerX" secondItem="daD-JL-NbQ" secondAttribute="centerX" constant="15" id="3aU-yr-0XC"/>
                             <constraint firstItem="WvY-df-oZX" firstAttribute="centerY" secondItem="daD-JL-NbQ" secondAttribute="centerY" id="vEe-Gy-kuX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mvc-F0-3Uc"/>
