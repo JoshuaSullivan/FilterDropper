@@ -66,6 +66,20 @@ final class AestheticsManager {
         case "CILightTunnel":
             filter.setValue(minSide * 0.3, forKey: kCIInputRadiusKey)
             filter.setValue(CGFloat.pi, forKey: "inputRotation")
+        case "CILineOverlay":
+            filter.setValue(0.15, forKey: "inputThreshold")
+            filter.setValue(1.5, forKey: "inputEdgeIntensity")
+            guard
+                let compositingFilter = CIFilter(name: "CISourceAtopCompositing"),
+                let srcImage = filter.value(forKey: kCIInputImageKey) as? CIImage,
+                let filterImage = filter.outputImage
+            else {
+                let blended = applyBackground(color: .white, to: filter)
+                return blended.outputImage
+            }
+            compositingFilter.setValue(filterImage, forKey: kCIInputImageKey)
+            compositingFilter.setValue(srcImage, forKey: kCIInputBackgroundImageKey)
+            return compositingFilter.outputImage
         case "CIMotionBlur":
             filter.setValue(minSide * 0.05, forKey: kCIInputRadiusKey)
         case "CIOpTile":
@@ -82,8 +96,6 @@ final class AestheticsManager {
             filter.setValue(pos, forKey: "inputLightPosition")
             filter.setValue(pointAt, forKey: "inputLightPointsAt")
             filter.setValue(0.0125, forKey: "inputConcentration")
-            let blended = applyBackground(color: .black, to: filter)
-            return blended.outputImage
         case "CITorusLensDistortion":
             filter.setValue(minSide * 0.45, forKey: kCIInputRadiusKey)
             filter.setValue(minSide * 0.3, forKey: kCIInputWidthKey)
@@ -98,11 +110,12 @@ final class AestheticsManager {
         case "CIVibrance":
             filter.setValue(0.4, forKey: "inputAmount")
         case "CIVignetteEffect":
-            filter.setValue(minSide, forKey: kCIInputRadiusKey)
+            filter.setValue(minSide * 0.45, forKey: kCIInputRadiusKey)
         default:
             break
         }
-        return filter.outputImage
+        let blended = applyBackground(color: .black, to: filter)
+        return blended.outputImage
     }
     
     static func applyBackground(color: CIColor, to filter: CIFilter) -> CIFilter {
