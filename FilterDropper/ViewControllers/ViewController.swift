@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         didSet {
             interactionPrompt.isHidden = !renderedImages.isEmpty
             resultDataSource.data = renderedImages
-            resultCollectionView.reloadData()
         }
     }
     
@@ -141,6 +140,9 @@ class ViewController: UIViewController {
         renderResults.append(result)
         if let image = UIImage(contentsOfFile: result.previewURL.path) {
             renderedImages.append(image)
+            let ip = IndexPath(item: renderedImages.count - 1, section: 0)
+            self.resultCollectionView.insertItems(at: [ip])
+            self.resultCollectionView.scrollToItem(at: ip, at: .right, animated: true)
         }
     }
     
