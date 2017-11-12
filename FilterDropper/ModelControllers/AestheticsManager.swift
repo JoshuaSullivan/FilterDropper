@@ -40,6 +40,11 @@ final class AestheticsManager {
         case "CIDotScreen", "CIHatchedScreen", "CILineScreen":
             filter.setValue(CGFloat.pi / 6.0, forKey: kCIInputAngleKey)
             filter.setValue(minSide * 0.01, forKey: kCIInputWidthKey)
+        case "CIDroste":
+            let p0 = CIVector(x: imageSize.width * 0.6, y: imageSize.height * 0.6)
+            let p1 = CIVector(x: imageSize.width * 0.4, y: imageSize.height * 0.4)
+            filter.setValue(p0, forKey: "inputInsetPoint0")
+            filter.setValue(p1, forKey: "inputInsetPoint1")
         case "CIEdges":
             filter.setValue(5.0, forKey: kCIInputIntensityKey)
         case "CIEdgeWork":
