@@ -10,6 +10,8 @@ import UIKit
 import MobileCoreServices
 
 protocol FilterCollectionDropManagerDelegate: class {
+    func filterDropManager(_ filterDropManager: FilterCollectionDropManager, dropHoverOver indexPath: IndexPath)
+    func filterDropManager(didStopDropHover filterDropManager: FilterCollectionDropManager)
     func filterDropManager(willReceiveImages filterDropManager: FilterCollectionDropManager)
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath)
 }
@@ -35,15 +37,16 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
         return result
     }
     
-    func collectionView(_ collectionView: UICollectionView, dropPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        return nil
-    }
-    
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnter session: UIDropSession) {
         
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        guard let ip = destinationIndexPath else {
+            delegate?.filterDropManager(didStopDropHover: self)
+            return UICollectionViewDropProposal(operation: .forbidden)
+        }
+        delegate?.filterDropManager(self, dropHoverOver: ip)
         if session.localDragSession != nil {
             return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
         }
@@ -51,10 +54,10 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidExit session: UIDropSession) {
-        
+        delegate?.filterDropManager(didStopDropHover: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
-        
+        delegate?.filterDropManager(didStopDropHover: self)
     }
 }

@@ -16,6 +16,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
             titleContainer.layer.cornerRadius = 8.0
         }
     }
+    @IBOutlet weak var selectionOverlay: UIImageView!
     private var currentFilter: String = ""
     
     func configure(with filterName: String) {
@@ -42,7 +43,11 @@ class FilterCollectionViewCell: UICollectionViewCell {
             }
             self.imageView.image = image
         }
-        
+        selectionOverlay.isHidden = true
+    }
+    
+    func showSelectedState(_ selected: Bool) {
+        self.selectionOverlay.isHidden = !selected
     }
     
 }

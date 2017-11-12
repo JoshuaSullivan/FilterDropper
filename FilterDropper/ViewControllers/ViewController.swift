@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     }()
     
     var isBlocked: Bool = false
+    var selectedIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,9 +179,38 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: FilterCollectionDropManagerDelegate {
+    
+    func filterDropManager(_ filterDropManager: FilterCollectionDropManager, dropHoverOver indexPath: IndexPath) {
+        if let selected = selectedIndexPath {
+            if selected == indexPath {
+                return
+            } else {
+                if let cell = filterCollectionView.cellForItem(at: selected) as? FilterCollectionViewCell {
+                    cell.showSelectedState(false)
+                }
+                if let cell = filterCollectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell {
+                    cell.showSelectedState(true)
+                    selectedIndexPath = indexPath
+                }
+            }
+        } else {
+            if let cell = filterCollectionView.cellForItem(at: indexPath) as? FilterCollectionViewCell {
+                cell.showSelectedState(true)
+                selectedIndexPath = indexPath
+            }
+        }
+    }
+    
+    func filterDropManager(didStopDropHover filterDropManager: FilterCollectionDropManager) {
+        self.filterCollectionView.visibleCells
+            .flatMap({ $0 as? FilterCollectionViewCell })
+            .forEach({ $0.showSelectedState(false) })
+    }
+    
     func filterDropManager(willReceiveImages filterDropManager: FilterCollectionDropManager) {
         blockUI()
     }
+    
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath) {
         guard !images.isEmpty else {
             unblockUI()
