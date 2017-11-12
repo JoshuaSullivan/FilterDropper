@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// These cells display filter thumbnails and act as drop targets for images.
 class FilterCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

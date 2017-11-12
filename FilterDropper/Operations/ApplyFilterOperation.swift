@@ -9,6 +9,7 @@
 import UIKit
 import CoreImage
 
+/// Renders the preview and full-res versions of a dropped image.
 class ApplyFilterOperation: Operation {
     
     typealias Completion = (RenderResult?) -> Void

@@ -12,6 +12,7 @@ protocol ResultCollectionDragManagerDataSource: class {
     func image(for indexPath: IndexPath) -> UIImage?
 }
 
+/// This class acts as the dragDelegate for the `resultsCollectionView` in the ViewController.
 class ResultCollectionDragManager: NSObject, UICollectionViewDragDelegate {
     
     weak var dataSource: ResultCollectionDragManagerDataSource?

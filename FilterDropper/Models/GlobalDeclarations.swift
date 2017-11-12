@@ -8,4 +8,5 @@
 
 import Foundation
 
+/// Putting saved images into a sub-directory so that it can be purged more easily.
 let savedImageDirectory = "savedImages"

@@ -16,12 +16,13 @@ protocol FilterCollectionDropManagerDelegate: class {
     func filterDropManager(_ filterDropManager: FilterCollectionDropManager, didReceive images: [UIImage], at indexPath: IndexPath)
 }
 
+/// This class functions as the dropDelegate for the `filterCollectionView` in the ViewController.
 class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     
     weak var delegate: FilterCollectionDropManagerDelegate?
     
+    // A drop was completed, attempt to load the images and send them for filter processing.
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        // THIS IS WHERE THE RUBBER HITS THE ROAD, BAY-BEE!!!
         guard let indexPath = coordinator.destinationIndexPath else { return }
         delegate?.filterDropManager(willReceiveImages: self)
         coordinator.session.loadObjects(ofClass: UIImage.self) {

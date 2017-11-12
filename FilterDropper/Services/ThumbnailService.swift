@@ -9,9 +9,13 @@
 import UIKit
 import CoreImage
 
+/// Provides rendering and caching for the filter thumbnails.
 final class ThumbnailService {
     
+    /// The result of requesting a thumbnail.
     typealias ThumbnailCompletion = (UIImage?) -> Void
+    
+    /// Le tulip
     private static let defaultImage = #imageLiteral(resourceName: "tulip")
     
     // Singleton
@@ -42,6 +46,7 @@ final class ThumbnailService {
         queueObservationToken.invalidate()
     }
     
+    /// Checks to ensure thumbnails are available for all filters, generating those which are missing.
     func generateThumbnailsIfNeeded(for filterNames: [String]) {
         guard let cache = cache else { return }
         debugPrint("Beginning thumbnail generation.")
@@ -53,6 +58,7 @@ final class ThumbnailService {
         queue.addOperations(operations, waitUntilFinished: false)
     }
     
+    /// Create a specific filter thumbnail.
     func thumbnail(for filterName: String, completion: @escaping ThumbnailCompletion) {
         
         // Check the cache for the image.
@@ -80,6 +86,7 @@ final class ThumbnailService {
         
     }
     
+    /// Helper method to ensure this class always completes on the main thread.
     private func fulfill(completion: @escaping ThumbnailCompletion, with image: UIImage?) {
         DispatchQueue.main.async {
             completion(image)

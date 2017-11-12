@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A simple cell containing and image view.
 class ResultImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 }

@@ -9,7 +9,9 @@
 import UIKit
 import CoreImage
 import Metal
+import OpenGLES
 
+/// A simple CoreImage rendering stack.
 final class RenderService {
     
     typealias Completion = (UIImage?) -> Void
@@ -36,6 +38,7 @@ final class RenderService {
         }
     }
     
+    /// Render a thumbnail using the provided image and filter name.
     func renderFilterThumbnail(baseImage: UIImage, filterName: String) -> UIImage? {
         guard
             let filter = CIFilter(name: filterName),
@@ -59,6 +62,7 @@ final class RenderService {
         return finalImage
     }
     
+    /// Render a full-resolution image using the provided CIImage.
     func render(image: CIImage, bounds: CGRect? = nil) -> UIImage? {
         let imageBounds = bounds ?? image.extent
         var finalImage: UIImage? = nil

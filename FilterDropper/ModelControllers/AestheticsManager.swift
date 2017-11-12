@@ -8,8 +8,7 @@
 
 import CoreImage
 
-/// This class is a 1-stop shop for applying aesthetic effects to images. Currently, I'm only setting the effect center.
-/// Radius might be another one to work with, but different filters have wildly different uses for the radius value, so it's hard to generalize.
+/// This class is a 1-stop shop for applying aesthetic effects to Core Image filters.
 final class AestheticsManager {
     static func applyAesthetics(to filter: CIFilter, withImageSize imageSize: CGSize) -> CIImage? {
         let keys = filter.inputKeys

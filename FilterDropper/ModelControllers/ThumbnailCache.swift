@@ -8,9 +8,11 @@
 
 import UIKit
 
+/// This class implements a simple cache for the thumbnails generated for each filter.
 class ThumbnailCache {
     
     enum CacheError: Error {
+        /// The operation to convert UIImage into JPEG data failed.
         case unableToCreateJPEGRepresentation
     }
     
@@ -26,6 +28,7 @@ class ThumbnailCache {
         }
     }
     
+    /// Save an image using the provided key.
     func store(thumbnail: UIImage, withKey key: String) throws {
         let proposedURL = url(for: key)
         guard let imageData = UIImageJPEGRepresentation(thumbnail, 0.8) else {
@@ -35,6 +38,7 @@ class ThumbnailCache {
         try imageData.write(to: proposedURL)
     }
     
+    /// Load an image using the provided key. If no image is found for the key, the operation returns nil.
     func retreive(thumbnailWithKey key: String) -> UIImage? {
         let proposedURL = url(for: key)
         do {
@@ -46,6 +50,7 @@ class ThumbnailCache {
         }
     }
     
+    /// Returns whether or not the cache contains an image for the provided key.
     func contains(key: String) -> Bool {
         let proposedURL = url(for: key)
         return (try? proposedURL.checkPromisedItemIsReachable()) ?? false

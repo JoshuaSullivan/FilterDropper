@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIImageOrientation {
+    
+    /// Provides an easy mapping between UIImageOrientation and CGImagePropertyOrientation.
     var cgImageOrientation: CGImagePropertyOrientation {
         switch self {
         case .up: return .up

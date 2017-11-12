@@ -10,6 +10,10 @@ import UIKit
 
 extension UIDevice {
     
+    /// Checks to see if the current device can really handle Metal rendering.
+    /// - Note: Many of the first-generation of 64-bit processors technically can do Metal, but
+    ///         they are abysmally slow at it. This method allows Metal to be used only on devices
+    ///         which can experience a performance benefit from it.
     var isMetalCapable: Bool {
         if TARGET_IPHONE_SIMULATOR != 0 || TARGET_OS_SIMULATOR != 0 {
             return false
@@ -24,9 +28,15 @@ extension UIDevice {
         }
     }
     
+    /// An easier way to inspect the current device type.
     struct HardwareModel {
+        /// The hardware family (iPhone, iPad, TV, etc.)
         let idiom: UIUserInterfaceIdiom
+        
+        /// The hardware generation.
         let generation: Int
+        
+        /// The model within that hardware generation.
         let model: Int
     }
     
@@ -41,6 +51,7 @@ extension UIDevice {
         return identifier
     }
     
+    /// Provides an easy-to-inspect struct of the current hardware.
     var hardwareModel: HardwareModel {
         let model = self.hardwareModelString as NSString
         let version = model.substring(from: model.length - 3)

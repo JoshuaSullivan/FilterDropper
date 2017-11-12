@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Creates a thumbnail, if needed. Otherwise, returns without doing work.
 class GeneratePreviewOperation: Operation {
     
     let baseImage: UIImage

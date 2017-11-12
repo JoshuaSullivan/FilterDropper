@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A simple class that provides single-section data to a UICollectionView.
 class CollectionViewDataSource<T>: NSObject, UICollectionViewDataSource {
     
     typealias CellConfiguration = (UICollectionViewCell, T) -> Void
