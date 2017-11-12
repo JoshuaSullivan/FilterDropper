@@ -101,6 +101,12 @@ class ViewController: UIViewController {
     deinit {
         queueObserver.invalidate()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard !UserDefaults.standard.bool(forKey: "didSeeTutorial") else { return }
+        UserDefaults.standard.set(true, forKey: "didSeeTutorial")
+        self.performSegue(withIdentifier: "showHelp", sender: nil)
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

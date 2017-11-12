@@ -158,11 +158,96 @@
                         <outlet property="interactionPrompt" destination="kOl-5y-GfL" id="nIT-JL-zHK"/>
                         <outlet property="resultCollectionView" destination="HPE-zQ-mfu" id="KZl-qt-YgR"/>
                         <segue destination="TD3-z1-f1A" kind="presentation" identifier="showOverlay" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="sqX-dl-gWb"/>
+                        <segue destination="6Ub-ex-AC1" kind="presentation" identifier="showHelp" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="t5K-w5-uzQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33.984375" y="34.375"/>
+        </scene>
+        <!--Help View Controller-->
+        <scene sceneID="PYq-TH-OKx">
+            <objects>
+                <viewController id="6Ub-ex-AC1" customClass="HelpViewController" customModule="FilterDropper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xLs-EQ-nn7">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zj-dH-r7z">
+                                <rect key="frame" x="0.0" y="20" width="1112" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79s-AL-u2F">
+                                        <rect key="frame" x="407" y="113" width="299" height="74"/>
+                                        <string key="text">2. Filtered images appear here!
+They can be dragged onto another
+filter or out to another app.</string>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="79s-AL-u2F" firstAttribute="centerX" secondItem="7zj-dH-r7z" secondAttribute="centerX" id="3kj-wn-47Q"/>
+                                    <constraint firstAttribute="height" constant="300" id="jga-2b-aAB"/>
+                                    <constraint firstItem="79s-AL-u2F" firstAttribute="centerY" secondItem="7zj-dH-r7z" secondAttribute="centerY" id="keH-Li-ye4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-vb-JEs">
+                                <rect key="frame" x="0.0" y="320" width="1112" height="514"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fic-80-KvT">
+                                        <rect key="frame" x="373" y="210" width="366.5" height="95.5"/>
+                                        <string key="text">1. Drop images from another app
+(such as Photos) on to one of the
+filter tiles to apply that effect!</string>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app works best in split-screen!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCt-d9-Vwp">
+                                        <rect key="frame" x="403" y="474" width="307" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Fic-80-KvT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wKh-vb-JEs" secondAttribute="leading" constant="20" id="29R-Ed-BoD"/>
+                                    <constraint firstItem="Fic-80-KvT" firstAttribute="centerY" secondItem="wKh-vb-JEs" secondAttribute="centerY" id="6Kw-in-3cI"/>
+                                    <constraint firstItem="CCt-d9-Vwp" firstAttribute="bottom" secondItem="wKh-vb-JEs" secondAttribute="bottomMargin" constant="-8" id="7xS-B5-nBL"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Fic-80-KvT" secondAttribute="trailing" constant="20" id="AfW-qs-kAh"/>
+                                    <constraint firstItem="CCt-d9-Vwp" firstAttribute="centerX" secondItem="wKh-vb-JEs" secondAttribute="centerX" id="SfT-KY-qIp"/>
+                                    <constraint firstItem="Fic-80-KvT" firstAttribute="centerX" secondItem="wKh-vb-JEs" secondAttribute="centerX" id="ftU-Fa-TTQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.80075374119718312" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="m4M-wW-9bn" firstAttribute="bottom" secondItem="wKh-vb-JEs" secondAttribute="bottom" id="AGd-va-Grn"/>
+                            <constraint firstItem="wKh-vb-JEs" firstAttribute="top" secondItem="7zj-dH-r7z" secondAttribute="bottom" id="HyW-mD-d5a"/>
+                            <constraint firstItem="7zj-dH-r7z" firstAttribute="top" secondItem="m4M-wW-9bn" secondAttribute="top" id="NPV-mM-w4K"/>
+                            <constraint firstItem="m4M-wW-9bn" firstAttribute="trailing" secondItem="wKh-vb-JEs" secondAttribute="trailing" id="Xeu-lq-0Ka"/>
+                            <constraint firstItem="7zj-dH-r7z" firstAttribute="leading" secondItem="m4M-wW-9bn" secondAttribute="leading" id="f5b-69-wuh"/>
+                            <constraint firstItem="wKh-vb-JEs" firstAttribute="leading" secondItem="m4M-wW-9bn" secondAttribute="leading" id="gCY-8f-dMy"/>
+                            <constraint firstItem="m4M-wW-9bn" firstAttribute="trailing" secondItem="7zj-dH-r7z" secondAttribute="trailing" id="hMq-fu-KRn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m4M-wW-9bn"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tHW-ec-WBH" appends="YES" id="hcV-Bn-aTi"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jQ2-O2-oRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="tHW-ec-WBH">
+                    <connections>
+                        <action selector="viewTappedWithSender:" destination="6Ub-ex-AC1" id="Kyy-5F-zqA"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="33" y="772"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0Gl-N2-gUt">

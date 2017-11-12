@@ -16,6 +16,7 @@
 		BC89A0D61FA77F3D00C5E3EC /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC89A0D51FA77F3D00C5E3EC /* FilterCollectionViewCell.swift */; };
 		BC89A0DF1FA79A5100C5E3EC /* filters.json in Resources */ = {isa = PBXBuildFile; fileRef = BC89A0DE1FA79A5100C5E3EC /* filters.json */; };
 		BC89A0E21FA79C9000C5E3EC /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC89A0E11FA79C9000C5E3EC /* ThumbnailService.swift */; };
+		BC9211161FB8DC1F00C1F2EB /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */; };
 		BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8762D1FA779DA00498755 /* AppDelegate.swift */; };
 		BCC876301FA779DA00498755 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8762F1FA779DA00498755 /* ViewController.swift */; };
 		BCC876331FA779DA00498755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876311FA779DA00498755 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		BC89A0DA1FA788FF00C5E3EC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BC89A0DE1FA79A5100C5E3EC /* filters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = filters.json; sourceTree = "<group>"; };
 		BC89A0E11FA79C9000C5E3EC /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
+		BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		BCC8762A1FA779DA00498755 /* FilterDropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterDropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC8762D1FA779DA00498755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCC8762F1FA779DA00498755 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				BCC8762F1FA779DA00498755 /* ViewController.swift */,
+				BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */,
 				BCED3F411FAB524600AFA292 /* Geometry+Math.swift in Sources */,
 				BCF56F551FA8DE36002F9E63 /* CollectionViewDataSource.swift in Sources */,
+				BC9211161FB8DC1F00C1F2EB /* HelpViewController.swift in Sources */,
 				BC170A261FA7ADF5001EE32F /* RenderService.swift in Sources */,
 				BC170A291FA7AECF001EE32F /* UIDevice+Model.swift in Sources */,
 				BC170A2C1FA80C24001EE32F /* GeneratePreviewOperation.swift in Sources */,
