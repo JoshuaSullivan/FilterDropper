@@ -58,6 +58,8 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         guard let indexPath = coordinator.destinationIndexPath else { return }
         delegate?.filterDropManager(willReceiveImages: self)
+        let message = NSLocalizedString("drop.loadImages", value: "Copying images…", comment: "Displayed when a drop begins.")
+        NotificationCenter.default.post(name: NotificationNames.updateStatus, object: nil, userInfo: ["status" : message])
         imagesComplete = false
         // Set rawComplete to -1 here so any previous use of the raw queue doesn't cause checkIfWorkComplete to accidentally succeed.
         rawComplete =  -1
@@ -96,13 +98,19 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
                 let localURL = FilterFileManager.savedImagesDirectory.appendingPathComponent(url.lastPathComponent)
                 do {
                     try FileManager.default.copyItem(at: url, to: localURL)
-                } catch {
-                    print("ERROR: Unable to make local copy of image.")
-                    self.rawComplete += 1
+                } catch let error as NSError {
+                    // If the error is that the file already exists, we'll just ignore the error.
+                    guard error.code == 516 else {
+                        print("ERROR: Unable to make local copy of image: \(error.localizedDescription)")
+                        self.rawComplete += 1
+                        return
+                    }
                 }
                 let uti = item.registeredTypeIdentifiers.first ?? self.rawImageType
                 let op = LoadAndRenderRawImageOperation(url: localURL, uti: uti, completion: self.handleRawRenderComplete)
                 self.rawQueue.addOperation(op)
+                let message = NSLocalizedString("drop.convertRaw", value: "Converting RAW images…", comment: "Displayed when the app begins working on converting raw images.")
+                NotificationCenter.default.post(name: NotificationNames.updateStatus, object: nil, userInfo: ["status" : message])
             })
         })
     }

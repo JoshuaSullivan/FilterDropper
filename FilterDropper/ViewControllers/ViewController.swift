@@ -226,6 +226,8 @@ extension ViewController: FilterCollectionDropManagerDelegate {
         }
         let filterName = self.filterNames[indexPath.item]
         self.apply(filterName: filterName, to: images)
+        let message = NSLocalizedString("drop.applyFilter", value: "Applying filter to images…", comment: "Displayed when the app begins applying filter to dropped iamges.")
+        NotificationCenter.default.post(name: NotificationNames.updateStatus, object: nil, userInfo: ["status" : message])
     }
     
 }

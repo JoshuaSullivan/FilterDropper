@@ -19,6 +19,8 @@
 		BC89A0E21FA79C9000C5E3EC /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC89A0E11FA79C9000C5E3EC /* ThumbnailService.swift */; };
 		BC9211161FB8DC1F00C1F2EB /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */; };
 		BCB816451FBB3BE900DAF998 /* FilterFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB816441FBB3BE900DAF998 /* FilterFileManager.swift */; };
+		BCB816491FBB4D4300DAF998 /* StatusOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB816481FBB4D4300DAF998 /* StatusOverlayViewController.swift */; };
+		BCB8164B1FBB4D6700DAF998 /* GlobalDeclarations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */; };
 		BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8762D1FA779DA00498755 /* AppDelegate.swift */; };
 		BCC876301FA779DA00498755 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8762F1FA779DA00498755 /* ViewController.swift */; };
 		BCC876331FA779DA00498755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC876311FA779DA00498755 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		BC89A0E11FA79C9000C5E3EC /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
 		BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		BCB816441FBB3BE900DAF998 /* FilterFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFileManager.swift; sourceTree = "<group>"; };
+		BCB816481FBB4D4300DAF998 /* StatusOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlayViewController.swift; sourceTree = "<group>"; };
+		BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDeclarations.swift; sourceTree = "<group>"; };
 		BCC8762A1FA779DA00498755 /* FilterDropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterDropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC8762D1FA779DA00498755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCC8762F1FA779DA00498755 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 			children = (
 				BCC8762F1FA779DA00498755 /* ViewController.swift */,
 				BC9211151FB8DC1F00C1F2EB /* HelpViewController.swift */,
+				BCB816481FBB4D4300DAF998 /* StatusOverlayViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				BC89A0D71FA7883C00C5E3EC /* Resources */,
 				BCC8762D1FA779DA00498755 /* AppDelegate.swift */,
 				BCC876341FA779DA00498755 /* Assets.xcassets */,
+				BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */,
 			);
 			path = FilterDropper;
 			sourceTree = "<group>";
@@ -289,9 +295,11 @@
 				BCED3F3F1FAA466100AFA292 /* RenderResult.swift in Sources */,
 				BCC876301FA779DA00498755 /* ViewController.swift in Sources */,
 				BC89A0D61FA77F3D00C5E3EC /* FilterCollectionViewCell.swift in Sources */,
+				BCB816491FBB4D4300DAF998 /* StatusOverlayViewController.swift in Sources */,
 				BCF1C1C31FB3F82100D85D8D /* AestheticsManager.swift in Sources */,
 				BC6BA1351FAA11A900F3122F /* FilterCollectionDropManager.swift in Sources */,
 				BC89A0E21FA79C9000C5E3EC /* ThumbnailService.swift in Sources */,
+				BCB8164B1FBB4D6700DAF998 /* GlobalDeclarations.swift in Sources */,
 				BCE158D01FB74D270084CB8D /* UIImage+Orientation.swift in Sources */,
 				BCC8762E1FA779DA00498755 /* AppDelegate.swift in Sources */,
 				BCED3F411FAB524600AFA292 /* Geometry+Math.swift in Sources */,

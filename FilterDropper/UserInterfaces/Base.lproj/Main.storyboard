@@ -252,10 +252,10 @@
             </objects>
             <point key="canvasLocation" x="33" y="772"/>
         </scene>
-        <!--View Controller-->
+        <!--Status Overlay View Controller-->
         <scene sceneID="0Gl-N2-gUt">
             <objects>
-                <viewController id="TD3-z1-f1A" sceneMemberID="viewController">
+                <viewController id="TD3-z1-f1A" customClass="StatusOverlayViewController" customModule="FilterDropper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="daD-JL-NbQ">
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -266,14 +266,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMe-5m-anU">
+                                <rect key="frame" x="0.0" y="453" width="1112" height="0.0"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WvY-df-oZX" firstAttribute="centerX" secondItem="daD-JL-NbQ" secondAttribute="centerX" constant="15" id="3aU-yr-0XC"/>
+                            <constraint firstItem="Mvc-F0-3Uc" firstAttribute="trailing" secondItem="ZMe-5m-anU" secondAttribute="trailing" id="Goh-cf-WUZ"/>
+                            <constraint firstItem="ZMe-5m-anU" firstAttribute="top" secondItem="WvY-df-oZX" secondAttribute="bottom" id="Vyp-m8-pCl"/>
+                            <constraint firstItem="ZMe-5m-anU" firstAttribute="leading" secondItem="Mvc-F0-3Uc" secondAttribute="leading" id="WE6-aD-aCG"/>
                             <constraint firstItem="WvY-df-oZX" firstAttribute="centerY" secondItem="daD-JL-NbQ" secondAttribute="centerY" id="vEe-Gy-kuX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mvc-F0-3Uc"/>
                     </view>
+                    <connections>
+                        <outlet property="statusLabel" destination="ZMe-5m-anU" id="XT6-UX-V6N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WA1-RF-JCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
