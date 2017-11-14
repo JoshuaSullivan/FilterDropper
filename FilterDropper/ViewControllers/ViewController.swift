@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     
     var isBlocked: Bool = false
     var selectedIndexPath: IndexPath?
+    private var isErrorOnDrop = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,8 @@ class ViewController: UIViewController {
         
         let keyPath = \OperationQueue.operationCount
         queueObserver = renderQueue.observe(keyPath, changeHandler: self.queueCountDidChange)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleErrorNotification(note:)), name: NotificationNames.importError, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,6 +102,7 @@ class ViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         queueObserver.invalidate()
     }
     
@@ -142,7 +146,10 @@ class ViewController: UIViewController {
     }
     
     private func renderComplete(result: RenderResult?) {
-        guard let result = result else { return }
+        guard let result = result else {
+            self.isErrorOnDrop = true
+            return
+        }
         renderResults.append(result)
         if let image = UIImage(contentsOfFile: result.previewURL.path) {
             renderedImages.append(image)
@@ -160,6 +167,7 @@ class ViewController: UIViewController {
     
     private func blockUI() {
         guard !isBlocked else { return }
+        self.isErrorOnDrop = false
         self.isBlocked = true
         self.performSegue(withIdentifier: "showOverlay", sender: nil)
     }
@@ -168,7 +176,20 @@ class ViewController: UIViewController {
         guard isBlocked else { return }
         self.dismiss(animated: true) {
             self.isBlocked = false
+            if self.isErrorOnDrop {
+                let title = NSLocalizedString("drop.error.title", value: "Uh-oh!", comment: "Title for alert that appears when a drop has failed.")
+                let message = NSLocalizedString("drop.error.message", value: "One or more of the images you dropped had a problem. Please try again.", comment: "Message for alert that appears when a drop has failed.")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let okay = NSLocalizedString("drop.error.button", value: "Okay", comment: "Button title for alert that appears when a drop has failed.")
+                let okayAction = UIAlertAction(title: okay, style: .default, handler: nil)
+                alert.addAction(okayAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
+    }
+    
+    @objc private func handleErrorNotification(note: Notification) {
+        isErrorOnDrop = true
     }
     
 }

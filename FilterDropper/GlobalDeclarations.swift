@@ -10,6 +10,7 @@ import Foundation
 
 struct NotificationNames {
     static let updateStatus = Notification.Name(rawValue: "updateStatusNotification")
+    static let importError = Notification.Name(rawValue: "importErrorNotification")
     
     private init() {}
 }

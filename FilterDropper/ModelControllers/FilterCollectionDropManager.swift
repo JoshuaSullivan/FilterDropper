@@ -52,6 +52,8 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
         }
     }
     
+    private var errorCount = 0
+    
     private var collectedImages: [UIImage] = []
     
     // A drop was completed, attempt to load the images and send them for filter processing.
@@ -63,6 +65,7 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
         imagesComplete = false
         // Set rawComplete to -1 here so any previous use of the raw queue doesn't cause checkIfWorkComplete to accidentally succeed.
         rawComplete =  -1
+        errorCount = 0
         workingIndexPath = indexPath
         coordinator.session.loadObjects(ofClass: UIImage.self) {
             [weak self]
@@ -92,19 +95,14 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
                 guard let `self` = self else { return }
                 guard let url = optionalURL else {
                     print("ERROR: Failed to get raw image's URL: \(optionalError?.localizedDescription ?? "Unknown reason.")")
+                    self.errorCount += 1
                     self.rawComplete += 1
                     return
                 }
-                let localURL = FilterFileManager.savedImagesDirectory.appendingPathComponent(url.lastPathComponent)
-                do {
-                    try FileManager.default.copyItem(at: url, to: localURL)
-                } catch let error as NSError {
-                    // If the error is that the file already exists, we'll just ignore the error.
-                    guard error.code == 516 else {
-                        print("ERROR: Unable to make local copy of image: \(error.localizedDescription)")
-                        self.rawComplete += 1
-                        return
-                    }
+                guard let localURL = FilterFileManager.copyRawImage(from: url) else {
+                    self.errorCount += 1
+                    self.rawComplete += 1
+                    return
                 }
                 let uti = item.registeredTypeIdentifiers.first ?? self.rawImageType
                 let op = LoadAndRenderRawImageOperation(url: localURL, uti: uti, completion: self.handleRawRenderComplete)
@@ -124,6 +122,9 @@ class FilterCollectionDropManager: NSObject, UICollectionViewDropDelegate {
     
     func checkIfWorkComplete() {
         if imagesComplete && rawComplete == rawCount {
+            if errorCount > 0 {
+                NotificationCenter.default.post(name: NotificationNames.importError, object: nil, userInfo: nil)
+            }
             delegate?.filterDropManager(self, didReceive: collectedImages, at: workingIndexPath)
             self.collectedImages = []
         }

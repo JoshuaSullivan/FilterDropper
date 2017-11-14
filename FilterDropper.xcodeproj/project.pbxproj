@@ -187,6 +187,9 @@
 		BCC8762C1FA779DA00498755 /* FilterDropper */ = {
 			isa = PBXGroup;
 			children = (
+				BCC8762D1FA779DA00498755 /* AppDelegate.swift */,
+				BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */,
+				BCC876341FA779DA00498755 /* Assets.xcassets */,
 				BC170A271FA7AEC2001EE32F /* Extensions */,
 				BCF56F531FA8DE02002F9E63 /* ModelControllers */,
 				BC89A0E51FA79D2200C5E3EC /* Models */,
@@ -197,9 +200,6 @@
 				BC89A0D11FA77E0100C5E3EC /* UserInterfaces */,
 				BC89A0D91FA788BB00C5E3EC /* Playgrounds */,
 				BC89A0D71FA7883C00C5E3EC /* Resources */,
-				BCC8762D1FA779DA00498755 /* AppDelegate.swift */,
-				BCC876341FA779DA00498755 /* Assets.xcassets */,
-				BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */,
 			);
 			path = FilterDropper;
 			sourceTree = "<group>";

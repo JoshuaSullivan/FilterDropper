@@ -61,15 +61,14 @@ class FilterFileManager {
     static func copyRawImage(from url: URL) -> URL? {
         let localURL = savedImagesDirectory.appendingPathComponent(url.lastPathComponent)
         do {
-            guard !(try localURL.checkResourceIsReachable()) else {
-                // The image alredy exists locally.
-                return localURL
-            }
             try fm.copyItem(at: url, to: localURL)
             return localURL
-        } catch {
-            print("ERROR: Unable to copy raw image to local storage: \(error.localizedDescription)")
-            return nil
+        } catch let error as NSError {
+            guard error.code == 516 else {
+                print("ERROR: Unable to copy raw image to local storage: \(error.localizedDescription)")
+                return nil
+            }
+            return localURL
         }
     }
 }
