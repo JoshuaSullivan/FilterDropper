@@ -48,7 +48,6 @@ final class ThumbnailService {
     
     /// Checks to ensure thumbnails are available for all filters, generating those which are missing.
     func generateThumbnailsIfNeeded(for filterNames: [String]) {
-        guard let cache = cache else { return }
         debugPrint("Beginning thumbnail generation.")
         let operations: [GeneratePreviewOperation] = filterNames.map({
             let op = GeneratePreviewOperation(baseImage: ThumbnailService.defaultImage, filterName: $0, cache: cache)
@@ -62,7 +61,7 @@ final class ThumbnailService {
     func thumbnail(for filterName: String, completion: @escaping ThumbnailCompletion) {
         
         // Check the cache for the image.
-        if let image = cache?.retreive(thumbnailWithKey: filterName) {
+        if let image = cache.retreive(thumbnailWithKey: filterName) {
             completion(image)
             return
         }
@@ -75,9 +74,7 @@ final class ThumbnailService {
             }
             
             // Try to cache the image.
-            if let cache = self.cache {
-                try? cache.store(thumbnail: image, withKey: filterName)
-            }
+            try? self.cache.store(thumbnail: image, withKey: filterName)
             
             // Return the image.
             self.fulfill(completion: completion, with: image)

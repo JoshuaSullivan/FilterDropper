@@ -16,18 +16,6 @@ class ThumbnailCache {
         case unableToCreateJPEGRepresentation
     }
     
-    private let storageURL: URL
-    
-    init?() {
-        if let url = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            storageURL = url
-        } else if let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            storageURL = url
-        } else {
-            return nil
-        }
-    }
-    
     /// Save an image using the provided key.
     func store(thumbnail: UIImage, withKey key: String) throws {
         let proposedURL = url(for: key)
@@ -58,7 +46,7 @@ class ThumbnailCache {
     
     /// Construct the standard URL for a given storage key.
     private func url(for key: String) -> URL {
-        return storageURL.appendingPathComponent(key).appendingPathExtension("jpg")
+        return FilterFileManager.thumbnailDirectory.appendingPathComponent(key).appendingPathExtension("jpg")
     }
 }
 

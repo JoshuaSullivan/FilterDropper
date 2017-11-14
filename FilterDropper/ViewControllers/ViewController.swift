@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     }
     
     private func apply(filterName: String, to images: [UIImage]) {
-        let ops = images.map({ ApplyFilterOperation(image: $0, filterName: filterName, completion: self.renderComplete) })
+        let ops = images.flatMap({ ApplyFilterOperation(image: $0, filterName: filterName, completion: self.renderComplete) })
         renderQueue.addOperations(ops, waitUntilFinished: false)
     }
     
@@ -227,6 +227,7 @@ extension ViewController: FilterCollectionDropManagerDelegate {
         let filterName = self.filterNames[indexPath.item]
         self.apply(filterName: filterName, to: images)
     }
+    
 }
 
 extension ViewController: ResultCollectionDragManagerDataSource {

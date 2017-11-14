@@ -18,30 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Clear out old images.
         print("Beginning purge of old images.")
-        let fm = FileManager.default
-        if let docs = try? fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            let imageDir = docs.appendingPathComponent(savedImageDirectory)
-            do {
-                // This will fail if the directory already exists, but that's okay.
-                try fm.createDirectory(at: imageDir, withIntermediateDirectories: false, attributes: nil)
-            } catch {
-                debugPrint("ERROR: Unable to create saved image directory: \(error.localizedDescription)")
-            }
-            if let fileURLs = try? fm.contentsOfDirectory(at: imageDir, includingPropertiesForKeys: nil, options: []) {
-                for url in fileURLs {
-                    do {
-                        try fm.removeItem(at: url)
-                    } catch {
-                        print("Failed to remove item at '\(url)': \(error.localizedDescription)")
-                    }
-                }
-            }
-        }
+        FilterFileManager.purgeSavedImages()
         print("Purge complete.")
         
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
