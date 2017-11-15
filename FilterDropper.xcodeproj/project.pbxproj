@@ -51,7 +51,7 @@
 		BCB816441FBB3BE900DAF998 /* FilterFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFileManager.swift; sourceTree = "<group>"; };
 		BCB816481FBB4D4300DAF998 /* StatusOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOverlayViewController.swift; sourceTree = "<group>"; };
 		BCB8164A1FBB4D6700DAF998 /* GlobalDeclarations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDeclarations.swift; sourceTree = "<group>"; };
-		BCC8762A1FA779DA00498755 /* FilterDropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterDropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCC8762A1FA779DA00498755 /* FXDropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FXDropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC8762D1FA779DA00498755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCC8762F1FA779DA00498755 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BCC876321FA779DA00498755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		BCC8762B1FA779DA00498755 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BCC8762A1FA779DA00498755 /* FilterDropper.app */,
+				BCC8762A1FA779DA00498755 /* FXDropper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BCC876291FA779DA00498755 /* FilterDropper */ = {
+		BCC876291FA779DA00498755 /* FXDropper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BCC8763C1FA779DA00498755 /* Build configuration list for PBXNativeTarget "FilterDropper" */;
+			buildConfigurationList = BCC8763C1FA779DA00498755 /* Build configuration list for PBXNativeTarget "FXDropper" */;
 			buildPhases = (
 				BCC876261FA779DA00498755 /* Sources */,
 				BCC876271FA779DA00498755 /* Frameworks */,
@@ -232,9 +232,9 @@
 			);
 			dependencies = (
 			);
-			name = FilterDropper;
+			name = FXDropper;
 			productName = FilterDropper;
-			productReference = BCC8762A1FA779DA00498755 /* FilterDropper.app */;
+			productReference = BCC8762A1FA779DA00498755 /* FXDropper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -266,7 +266,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BCC876291FA779DA00498755 /* FilterDropper */,
+				BCC876291FA779DA00498755 /* FXDropper */,
 			);
 		};
 /* End PBXProject section */
@@ -486,7 +486,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BCC8763C1FA779DA00498755 /* Build configuration list for PBXNativeTarget "FilterDropper" */ = {
+		BCC8763C1FA779DA00498755 /* Build configuration list for PBXNativeTarget "FXDropper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCC8763D1FA779DA00498755 /* Debug */,
